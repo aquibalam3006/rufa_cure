@@ -10,7 +10,7 @@ function Register() {
   const [role, setRole] = useState('patient'); 
   const navigate = useNavigate();
 
-  // .env se backend ka URL nikalna
+  // 🚀 .env se backend ka URL nikalna
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleRegister = async (e) => {

@@ -19,18 +19,30 @@ const app = express();
 
 
 // ==========================================
-// 🚀 1. BULLETPROOF CORS SETUP FOR VERCEL
+// 🚀 BULLETPROOF CORS SETUP FOR LOCAL & VERCEL
 // ==========================================
-const frontendUrl = process.env.FRONTEND_URL || 'https://rufa-cure-wwzk.vercel.app';
+// Yahan hum array bana rahe hain taaki dono domains allow ho sakein
+const allowedOrigins = [
+  'http://localhost:5173', // Aapka Local Frontend
+  'https://rufa-cure-wwzk.vercel.app', // Aapka Live Frontend
+  process.env.FRONTEND_URL // Backup ke liye
+];
 
 app.use(cors({
-  origin: frontendUrl,
+  origin: function (origin, callback) {
+    // Agar origin allowed list me hai, ya fir Postman/Insomnia se request aa rahi hai (!origin)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// 👇 NAYA FIX: Express 5.x aur Vercel ke liye Manual OPTIONS handler
+// Express 5.x aur Vercel ke liye Manual OPTIONS handler
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();

@@ -8,6 +8,7 @@ function VerificationPage() {
   const location = useLocation();
   const email = location.state?.email || "";
 
+  // 🚀 .env se backend ka URL nikalna
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleVerify = async (e) => {
@@ -19,16 +20,29 @@ function VerificationPage() {
         body: JSON.stringify({ email, code }),
       });
       const data = await response.json();
+      
       if (response.ok) {
         localStorage.setItem('token', data.token); 
         localStorage.setItem('user', JSON.stringify(data.user));
         
         const userRole = data.user.role;
+        const hasProfile = data.user.hasProfile; // 👈 LOGIC ADDED HERE
+        
+        // ==========================================
+        // 🚀 SMART REDIRECT LOGIC (FIXED)
+        // ==========================================
         if (userRole === 'doctor') {
-          navigate('/doctor-dashboard'); 
+          if (hasProfile) {
+            // Agar profile already bani hui hai toh dashboard pe bhejo
+            navigate('/doctor-dashboard'); 
+          } else {
+            // Naya doctor register karke verify kar raha hai -> Setup Profile pe bhejo
+            navigate('/doctor/setup-profile'); 
+          }
         } else if (userRole === 'admin') {
           navigate('/admin-dashboard'); 
         } else {
+          // Patient
           navigate('/'); 
         }
       } else {
