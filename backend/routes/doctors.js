@@ -8,13 +8,9 @@ const DoctorProfile = require('../models/DoctorProfile');
 const Medicine = require('../models/Medicine');
 const PatientReport = require('../models/PatientReport');
 
-// --- MULTER CONFIGURATION FOR FILE UPLOADS ---
-const storage = multer.diskStorage({
-  destination: './uploads/docs/',
-  filename: (req, file, cb) => {
-    cb(null, `FILE-${Date.now()}${path.extname(file.originalname)}`);
-  }
-});
+// --- MULTER CONFIGURATION FOR VERCEL (MEMORY STORAGE) ---
+// Vercel serverless hai, wahan disk par save nahi kar sakte isliye memoryStorage lagaya hai
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 
@@ -40,7 +36,7 @@ router.post('/setup-profile', upload.fields([
 ]), async (req, res) => {
   try {
     const data = req.body;
-    const files = req.files;
+    const files = req.files || {}; // Fallback agar koi file na ho
     
     const existing = await DoctorProfile.findOne({ userId: data.userId });
     
@@ -48,13 +44,14 @@ router.post('/setup-profile', upload.fields([
       ...data,
       specialization: data.specialization ? data.specialization.split(',') : [],
       languagesSpoken: data.languagesSpoken ? data.languagesSpoken.split(',') : [],
-      documents: files ? {
-        aadharCard: files.aadharCard ? files.aadharCard[0].path : existing?.documents?.aadharCard,
-        panCardDoc: files.panCardDoc ? files.panCardDoc[0].path : existing?.documents?.panCardDoc,
-        medicalDegree: files.medicalDegree ? files.medicalDegree[0].path : existing?.documents?.medicalDegree,
-        mciCertificate: files.mciCertificate ? files.mciCertificate[0].path : existing?.documents?.mciCertificate,
-        clinicRegProof: files.clinicRegProof ? files.clinicRegProof[0].path : existing?.documents?.clinicRegProof
-      } : existing?.documents,
+      documents: {
+        // Memory storage mein .path nahi hota, isliye temporarily .originalname use kar rahe hain
+        aadharCard: files.aadharCard ? `Temp-Vercel-${files.aadharCard[0].originalname}` : existing?.documents?.aadharCard,
+        panCardDoc: files.panCardDoc ? `Temp-Vercel-${files.panCardDoc[0].originalname}` : existing?.documents?.panCardDoc,
+        medicalDegree: files.medicalDegree ? `Temp-Vercel-${files.medicalDegree[0].originalname}` : existing?.documents?.medicalDegree,
+        mciCertificate: files.mciCertificate ? `Temp-Vercel-${files.mciCertificate[0].originalname}` : existing?.documents?.mciCertificate,
+        clinicRegProof: files.clinicRegProof ? `Temp-Vercel-${files.clinicRegProof[0].originalname}` : existing?.documents?.clinicRegProof
+      },
       banking: {
         accountHolderName: data.accountHolderName,
         accountNumber: data.accountNumber,
@@ -119,7 +116,8 @@ router.post('/report/upload', upload.single('reportFile'), async (req, res) => {
       patientName,
       title,
       date,
-      fileUrl: req.file.path // File ka raasta save kar rahe hain
+      // Future me yahan Cloudinary ka URL aayega, abhi ke liye dummy path
+      fileUrl: `Temp-Vercel-${req.file.originalname}` 
     });
 
     await newReport.save();
