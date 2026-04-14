@@ -3,12 +3,14 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 
 function ResetPasswordPage() {
-  const [otp, setOtp] = useState(''); // 🚀 Naya State OTP ke liye
+  const [otp, setOtp] = useState(''); 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email || "";
+
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,10 +18,10 @@ function ResetPasswordPage() {
     if (newPassword !== confirmPassword) return alert("Passwords do not match.");
     
     try {
-      const response = await fetch('http://localhost:5000/api/auth/reset-password', {
+      const response = await fetch(`${API_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, otp, newPassword }), // 🚀 OTP backend ko bhej rahe hain
+        body: JSON.stringify({ email, otp, newPassword }), 
       });
       const data = await response.json();
       if (response.ok) {
@@ -40,7 +42,6 @@ function ResetPasswordPage() {
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           
-          {/* 🚀 Naya OTP Field */}
           <div>
             <label className="block text-gray-700 text-sm font-semibold mb-2">6-Digit OTP</label>
             <input type="text" maxLength={6} className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-center text-xl tracking-[0.5em]" value={otp} onChange={(e) => setOtp(e.target.value)} required />

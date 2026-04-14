@@ -7,6 +7,9 @@ function AdminDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Dashboard');
   
+  // .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   // --- DYNAMIC DATA FROM BACKEND ---
   const [pendingApprovals, setPendingApprovals] = useState([]);
   const [activeDoctors, setActiveDoctors] = useState([]);
@@ -36,7 +39,7 @@ function AdminDashboard() {
   const fetchAdminData = async () => {
     try {
       // Get Pending Doctors
-      const resPending = await fetch('http://localhost:5000/api/admin/pending-doctors');
+      const resPending = await fetch(`${API_URL}/api/admin/pending-doctors`);
       const dataPending = await resPending.json();
       if(dataPending.ok) {
         // UI ke hisaab se data format karna
@@ -56,7 +59,7 @@ function AdminDashboard() {
       }
 
       // Get Active Doctors
-      const resActive = await fetch('http://localhost:5000/api/admin/active-doctors');
+      const resActive = await fetch(`${API_URL}/api/admin/active-doctors`);
       const dataActive = await resActive.json();
       if(dataActive.ok) {
         const formattedActive = dataActive.doctors.map(d => ({
@@ -90,7 +93,7 @@ function AdminDashboard() {
   // 🚀 APPROVE TO BACKEND
   const handleApproveDoctor = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/approve-doctor/${selectedDocReq.id}`, {
+      const response = await fetch(`${API_URL}/api/admin/approve-doctor/${selectedDocReq.id}`, {
         method: 'PUT'
       });
       const data = await response.json();
@@ -112,7 +115,7 @@ function AdminDashboard() {
     if(!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/reject-doctor/${selectedDocReq.id}`, {
+      const response = await fetch(`${API_URL}/api/admin/reject-doctor/${selectedDocReq.id}`, {
         method: 'DELETE'
       });
       const data = await response.json();

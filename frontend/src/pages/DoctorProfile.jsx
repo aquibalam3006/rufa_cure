@@ -8,6 +8,9 @@ function DoctorProfile() {
   const [activeTab, setActiveTab] = useState('basic'); // basic, professional, clinic, bank
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   // Initial State
   const [formData, setFormData] = useState({
     name: '',
@@ -51,7 +54,8 @@ function DoctorProfile() {
       const userId = userObj.id || userObj._id;
 
       try {
-        const response = await fetch(`http://localhost:5000/api/doctors/detail/${userId}`);
+        // 🚀 Backend API ko call karna doctor ki details ke liye (Live URL)
+        const response = await fetch(`${API_URL}/api/doctors/detail/${userId}`);
         const data = await response.json();
 
         if (data.ok && data.profile) {
@@ -72,7 +76,7 @@ function DoctorProfile() {
     };
 
     fetchDoctorData();
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -92,7 +96,8 @@ function DoctorProfile() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:5000/api/doctors/setup-profile', {
+      // 🚀 UPDATE PROFILE API CALL (Live URL)
+      const response = await fetch(`${API_URL}/api/doctors/setup-profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

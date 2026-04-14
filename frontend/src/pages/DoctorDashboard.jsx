@@ -7,6 +7,9 @@ function DoctorDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [doctorName, setDoctorName] = useState('Loading...');
   
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   // TABS STATE
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [appointmentFilter, setAppointmentFilter] = useState('All');
@@ -59,7 +62,7 @@ function DoctorDashboard() {
 
 
   // =========================================================
-  // 🔌 FETCH DOCTOR PROFILE FROM BACKEND
+  // 🔌 FETCH DOCTOR PROFILE FROM BACKEND (Live URL)
   // =========================================================
   useEffect(() => {
     const userStr = localStorage.getItem('user');
@@ -71,8 +74,8 @@ function DoctorDashboard() {
         // Initial naam set karna
         setDoctorName(userObj.name || 'Doctor');
 
-        // Backend API ko call karna doctor ki details ke liye
-        fetch(`http://localhost:5000/api/doctors/detail/${userId}`)
+        // 🚀 Backend API ko call karna doctor ki details ke liye (Live URL)
+        fetch(`${API_URL}/api/doctors/detail/${userId}`)
           .then(res => res.json())
           .then(data => {
             if (data.ok && data.profile) {
@@ -102,7 +105,7 @@ function DoctorDashboard() {
       // Agar user login nahi hai toh login pe bhejo
       navigate('/login');
     }
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -617,7 +620,7 @@ function DoctorDashboard() {
 
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2">
                          <div className="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg border-4 border-[#f4f7f9] hover:bg-blue-600 hover:-translate-y-1 transition-all">
-                            ↓
+                           ↓
                          </div>
                       </div>
                     </div>
@@ -662,23 +665,23 @@ function DoctorDashboard() {
                         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                               <div className="flex gap-3 mb-2"><span className="text-2xl">🌡️</span> <span className="text-gray-500 text-sm font-bold">Body Temp</span></div>
-                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals.temp}</p>
+                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals?.temp || 'N/A'}</p>
                            </div>
                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                               <div className="flex gap-3 mb-2"><span className="text-2xl">🩸</span> <span className="text-gray-500 text-sm font-bold">Blood Pressure</span></div>
-                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals.bp} <span className="text-sm font-medium text-gray-400">mmHg</span></p>
+                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals?.bp || 'N/A'} <span className="text-sm font-medium text-gray-400">mmHg</span></p>
                            </div>
                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                               <div className="flex gap-3 mb-2"><span className="text-2xl">💉</span> <span className="text-gray-500 text-sm font-bold">Blood Sugar</span></div>
-                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals.sugar}</p>
+                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals?.sugar || 'N/A'}</p>
                            </div>
                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                               <div className="flex gap-3 mb-2"><span className="text-2xl">⚖️</span> <span className="text-gray-500 text-sm font-bold">Body Weight</span></div>
-                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals.weight}</p>
+                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals?.weight || 'N/A'}</p>
                            </div>
                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                               <div className="flex gap-3 mb-2"><span className="text-2xl">💤</span> <span className="text-gray-500 text-sm font-bold">Avg. Sleep</span></div>
-                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals.sleep}</p>
+                              <p className="text-3xl font-black text-gray-800">{selectedPatient.vitals?.sleep || 'N/A'}</p>
                            </div>
                            <div className="p-5 rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 flex items-center justify-center cursor-pointer hover:bg-blue-100 transition">
                               <p className="text-blue-500 font-bold">+ Add More</p>
@@ -695,19 +698,19 @@ function DoctorDashboard() {
                             <div className="space-y-5">
                               <div>
                                 <div className="flex justify-between text-sm font-bold text-gray-600 mb-2"><span>Basic ADL</span><span>8/12</span></div>
-                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-orange-500 h-2 rounded-full" style={{width: `${selectedPatient.functional.basic}%`}}></div></div>
+                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-orange-500 h-2 rounded-full" style={{width: `${selectedPatient.functional?.basic || 0}%`}}></div></div>
                               </div>
                               <div>
                                 <div className="flex justify-between text-sm font-bold text-gray-600 mb-2"><span>Intermediate ADL</span><span>6/12</span></div>
-                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-green-500 h-2 rounded-full" style={{width: `${selectedPatient.functional.intermediate}%`}}></div></div>
+                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-green-500 h-2 rounded-full" style={{width: `${selectedPatient.functional?.intermediate || 0}%`}}></div></div>
                               </div>
                               <div>
                                 <div className="flex justify-between text-sm font-bold text-gray-600 mb-2"><span>Mental Health</span><span>8/25</span></div>
-                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-yellow-400 h-2 rounded-full" style={{width: `${selectedPatient.functional.mental}%`}}></div></div>
+                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-yellow-400 h-2 rounded-full" style={{width: `${selectedPatient.functional?.mental || 0}%`}}></div></div>
                               </div>
                               <div>
                                 <div className="flex justify-between text-sm font-bold text-gray-600 mb-2"><span>Social Interaction</span><span>20/30</span></div>
-                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-teal-500 h-2 rounded-full" style={{width: `${selectedPatient.functional.social}%`}}></div></div>
+                                <div className="w-full bg-gray-100 rounded-full h-2"><div className="bg-teal-500 h-2 rounded-full" style={{width: `${selectedPatient.functional?.social || 0}%`}}></div></div>
                               </div>
                             </div>
                           </div>
@@ -862,7 +865,7 @@ function DoctorDashboard() {
                       <img src={`https://ui-avatars.com/api/?name=${selectedPatient.name}&background=random`} className="w-14 h-14 rounded-full shadow-sm border border-gray-100" alt="avatar" />
                       <div>
                         <h3 className="font-extrabold text-gray-900 text-lg leading-tight">{selectedPatient.name}</h3>
-                        <p className="text-[10px] text-gray-500 font-bold mt-0.5">WBS: {selectedPatient.id}</p>
+                        <p className="text-[10px] text-gray-500 font-bold mt-0.5">WBS: {selectedPatient.id || 'N/A'}</p>
                         <button className="text-[11px] text-blue-500 font-bold mt-1 hover:underline flex items-center gap-1">✏️ Edit</button>
                       </div>
                     </div>
@@ -875,13 +878,13 @@ function DoctorDashboard() {
                         <span>Basic Information (7)</span><span className="text-gray-400 font-light">⌃</span>
                       </div>
                       <div className="space-y-4 text-sm">
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Gender</p><p className="font-bold text-gray-800">{selectedPatient.gender}</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Age</p><p className="font-bold text-gray-800">{selectedPatient.age}</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Phone</p><p className="font-bold text-gray-800">{selectedPatient.phone}</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Email</p><p className="font-bold text-blue-600 truncate">{selectedPatient.email}</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Address</p><p className="font-bold text-gray-800 leading-snug">{selectedPatient.address}</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Insurance</p><p className="font-bold text-gray-800 leading-snug">Member ID: 783402847201<br/>{selectedPatient.insurance}<br/>United States of America</p></div>
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Language</p><p className="font-bold text-gray-800">{selectedPatient.language}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Gender</p><p className="font-bold text-gray-800">{selectedPatient.gender || 'N/A'}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Age</p><p className="font-bold text-gray-800">{selectedPatient.age || 'N/A'}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Phone</p><p className="font-bold text-gray-800">{selectedPatient.phone || 'N/A'}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Email</p><p className="font-bold text-blue-600 truncate">{selectedPatient.email || 'N/A'}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Address</p><p className="font-bold text-gray-800 leading-snug">{selectedPatient.address || 'N/A'}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Insurance</p><p className="font-bold text-gray-800 leading-snug">Member ID: 783402847201<br/>{selectedPatient.insurance || 'None'}<br/>United States of America</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Language</p><p className="font-bold text-gray-800">{selectedPatient.language || 'English'}</p></div>
                       </div>
                     </div>
                     <div className="border-t border-gray-100 pt-5">
@@ -889,7 +892,7 @@ function DoctorDashboard() {
                         <span>Appointments History (2)</span><span className="text-gray-400 font-light">⌃</span>
                       </div>
                       <div className="space-y-4 text-sm">
-                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Last Appointment</p><p className="font-bold text-gray-800">{selectedPatient.lastVisit}</p></div>
+                        <div><p className="text-xs font-bold text-gray-500 mb-0.5">Last Appointment</p><p className="font-bold text-gray-800">{selectedPatient.lastVisit || 'N/A'}</p></div>
                         <div><p className="text-xs font-bold text-gray-500 mb-0.5">Earlier</p><p className="font-bold text-gray-800">05/01/2026 - 8:00 PM</p></div>
                       </div>
                     </div>

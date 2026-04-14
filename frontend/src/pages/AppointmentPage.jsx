@@ -8,6 +8,9 @@ function AppointmentPage() {
   const navigate = useNavigate();
   const preFilledData = location.state || {};
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -76,8 +79,8 @@ function AppointmentPage() {
     const doctorUpi = selectedDoc ? selectedDoc.upiId : 'rufacure@upi';
 
     try {
-      // Backend par appointment create kar rahe hain
-      const response = await fetch('http://localhost:5000/api/appointments/book', {
+      // 🚀 Backend par appointment create kar rahe hain (Live URL)
+      const response = await fetch(`${API_URL}/api/appointments/book`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

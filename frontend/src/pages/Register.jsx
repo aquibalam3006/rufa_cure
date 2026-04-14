@@ -7,16 +7,18 @@ function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('patient'); // Naya state Role ke liye
+  const [role, setRole] = useState('patient'); 
   const navigate = useNavigate();
+
+  // .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Role ko backend bhej rahe hain
         body: JSON.stringify({ name, email, phone, password, role }),
       });
       const data = await response.json();
@@ -36,7 +38,6 @@ function Register() {
         </div>
         <form onSubmit={handleRegister} className="space-y-5">
           
-          {/* NAYA FEATURE: Role Selection */}
           <div>
             <label className="block text-gray-700 text-sm font-semibold mb-2">Register as</label>
             <div className="grid grid-cols-2 gap-4">

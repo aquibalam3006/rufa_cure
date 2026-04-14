@@ -9,13 +9,17 @@ import doctorImage from '../assets/doctorPNG.png';
 function Home() {
   const navigate = useNavigate();
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [selectedSpeciality, setSelectedSpeciality] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [allDoctors, setAllDoctors] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch('http://localhost:5000/api/doctors/all')
+    // 🚀 Backend API ko call karna (Live URL)
+    fetch(`${API_URL}/api/doctors/all`)
       .then(res => res.json())
       .then(data => {
         if(data.ok && data.doctors) {
@@ -27,7 +31,7 @@ function Home() {
         }
       })
       .catch(err => console.error("Error fetching doctors for Home Page:", err));
-  }, []);
+  }, [API_URL]);
 
   const handleMakeAppointment = () => {
     const token = localStorage.getItem('token');

@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar'; 
-// GoogleGenerativeAI import hata diya gaya hai bcz ab hum backend use karenge
 
 function AskRufa() {
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
+
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   // --- STRICT LOGIN CHECK ---
   useEffect(() => {
@@ -61,17 +63,15 @@ function AskRufa() {
     setIsTyping(true); 
 
     try {
-      // Naya Logic: Backend API ko call kar rahe hain
-      const response = await fetch('http://localhost:5000/api/ai/ask-rufa', {
+      // 🚀 Backend API ko call kar rahe hain (Live URL)
+      const response = await fetch(`${API_URL}/api/ai/ask-rufa`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Agar aapne token system fully implement kiya hai toh Authorization header yahan aayega
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           message: userMsg,
-          // Gemini format mein history bhej rahe hain
           history: messages.map(m => ({
             role: m.sender === 'user' ? 'user' : 'model',
             parts: [{ text: m.text }]

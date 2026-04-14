@@ -8,6 +8,9 @@ function AdminLogin() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
     setError(''); // Type karte hi error hata do
@@ -19,8 +22,8 @@ function AdminLogin() {
     setError('');
 
     try {
-      // 🚀 BACKEND API CALL FOR ADMIN LOGIN
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+      // 🚀 BACKEND API CALL FOR ADMIN LOGIN (Live URL)
+      const response = await fetch(`${API_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

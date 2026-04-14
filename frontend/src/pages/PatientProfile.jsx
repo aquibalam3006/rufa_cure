@@ -10,6 +10,9 @@ function PatientProfile() {
   const profilePicInputRef = useRef(null);
   const recordFileInputRef = useRef(null);
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [patientData, setPatientData] = useState({
     name: '', uhid: '', age: 0, gender: '', bloodGroup: '', height: '', weight: '', bp: '', heartRate: '',
     email: '', phone: '', dob: '', emergencyName: '', emergencyRelation: '', emergencyPhone: '',
@@ -46,7 +49,8 @@ function PatientProfile() {
       const user = JSON.parse(localStorage.getItem('user'));
       if (!user) return navigate('/login');
       try {
-        const response = await fetch(`http://localhost:5000/api/patients/profile/${user.id || user._id}`);
+        // 🚀 BACKEND API CALL FOR PATIENT PROFILE (Live URL)
+        const response = await fetch(`${API_URL}/api/patients/profile/${user.id || user._id}`);
         const data = await response.json();
         if (data.ok && data.patient) {
           const p = data.patient;
@@ -64,7 +68,7 @@ function PatientProfile() {
       } catch (error) { console.error(error); }
     };
     fetchPatientProfile();
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   const showNotification = (msg) => {
     setToastMessage(msg);
@@ -75,7 +79,8 @@ function PatientProfile() {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem('user'));
     const body = { userId: user.id || user._id, bp: e.target.bp.value, weight: e.target.weight.value + ' kg' };
-    const res = await fetch('http://localhost:5000/api/patients/update', {
+    // 🚀 BACKEND API CALL FOR UPDATING VITALS (Live URL)
+    const res = await fetch(`${API_URL}/api/patients/update`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
@@ -89,7 +94,8 @@ function PatientProfile() {
       const formData = new FormData();
       formData.append('recordFile', file);
       formData.append('title', file.name);
-      const res = await fetch(`http://localhost:5000/api/patients/upload-record/${user.id || user._id}`, { method: 'POST', body: formData });
+      // 🚀 BACKEND API CALL FOR UPLOADING RECORD (Live URL)
+      const res = await fetch(`${API_URL}/api/patients/upload-record/${user.id || user._id}`, { method: 'POST', body: formData });
       const data = await res.json();
       if (data.ok) { setMedicalRecords([data.record, ...medicalRecords]); showNotification("File Uploaded!"); }
     }
@@ -105,7 +111,8 @@ function PatientProfile() {
       emergencyContact: { name: e.target.emergencyName.value, relation: e.target.emergencyRelation.value, phone: e.target.emergencyPhone.value },
       address: { street: e.target.address.value, city: e.target.city.value, state: e.target.state.value, pincode: e.target.pincode.value }
     };
-    const res = await fetch('http://localhost:5000/api/patients/update', {
+    // 🚀 BACKEND API CALL FOR UPDATING PROFILE (Live URL)
+    const res = await fetch(`${API_URL}/api/patients/update`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updateBody)
     });

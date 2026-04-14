@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 
 function VerificationPage() {
@@ -8,10 +8,12 @@ function VerificationPage() {
   const location = useLocation();
   const email = location.state?.email || "";
 
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const handleVerify = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/verify-email', {
+      const response = await fetch(`${API_URL}/api/auth/verify-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code }),
@@ -46,7 +48,6 @@ function VerificationPage() {
           <div>
             <label className="block text-gray-700 text-sm font-semibold mb-2">Verification Code</label>
             <input type="text" className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-center text-xl tracking-[0.5em]" value={code} onChange={(e) => setCode(e.target.value)} required maxLength={6} />
-            {/* Hata diya: (Test code: 123456) kyunki ab ye real OTP maangega */}
           </div>
           <button type="submit" className="w-full bg-[#008985] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#005a57] transition shadow-md">Verify</button>
         </form>

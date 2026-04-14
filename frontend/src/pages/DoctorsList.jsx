@@ -10,6 +10,9 @@ function Doctors() {
   const [loading, setLoading] = useState(true);
   const [doctorsList, setDoctorsList] = useState([]);
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const initialFilter = location.state?.filterSpeciality || 'All Specialities';
   const [selectedFilter, setSelectedFilter] = useState(initialFilter);
   const [selectedDoctorDetail, setSelectedDoctorDetail] = useState(null);
@@ -24,10 +27,10 @@ function Doctors() {
     const token = localStorage.getItem('token');
     if (token) setIsLoggedIn(true);
 
-    // Fetch Doctors from Centralized Route
+    // 🚀 Fetch Doctors from Centralized Route (Live URL)
     const fetchDoctors = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/doctors/all');
+        const response = await fetch(`${API_URL}/api/doctors/all`);
         const data = await response.json();
         
         if (data.ok) {
@@ -61,7 +64,7 @@ function Doctors() {
     };
 
     fetchDoctors();
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   const handleBookAppointment = (doctorObj, e) => {
     if (e) e.stopPropagation();

@@ -15,6 +15,16 @@ const prescriptionRoutes = require('./routes/prescriptions');
 const patientRoutes = require('./routes/patients');
 const adminRoutes = require('./routes/admin');
 const app = express();
+const cors = require('cors');
+
+
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+app.use(cors({
+  origin: frontendUrl, 
+  credentials: true
+}));
+
 
 // 3. Middlewares
 // CORS ko allow kar rahe hain frontend (3000 ya 5173) ke liye

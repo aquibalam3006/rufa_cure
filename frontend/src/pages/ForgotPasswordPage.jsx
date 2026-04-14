@@ -7,11 +7,13 @@ function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+      const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -21,7 +23,6 @@ function ForgotPasswordPage() {
       
       if (response.ok) {
         alert(data.message); 
-        // Backend se email jane ke baad, reset page par bhej do
         navigate('/set-new-password', { state: { email } }); 
       } else {
         alert('Failed: ' + data.message);

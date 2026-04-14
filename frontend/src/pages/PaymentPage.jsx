@@ -8,6 +8,9 @@ function PaymentPage() {
   const navigate = useNavigate();
   const appointmentData = location.state || {};
 
+  // 🚀 .env se backend ka URL nikalna
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [paymentStatus, setPaymentStatus] = useState('listening'); // listening, success
   const [timeLeft, setTimeLeft] = useState(300); // 5 minutes timer for payment
 
@@ -37,7 +40,8 @@ function PaymentPage() {
     if (paymentStatus === 'listening' && appointmentData.appointmentId) {
       pollingInterval = setInterval(async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/appointments/status/${appointmentData.appointmentId}`);
+          // 🚀 Live URL for polling
+          const response = await fetch(`${API_URL}/api/appointments/status/${appointmentData.appointmentId}`);
           const data = await response.json();
           
           if (data.ok && data.paymentStatus === 'Paid') {
@@ -55,12 +59,13 @@ function PaymentPage() {
     }
 
     return () => clearInterval(pollingInterval);
-  }, [paymentStatus, appointmentData.appointmentId, navigate]);
+  }, [paymentStatus, appointmentData.appointmentId, navigate, API_URL]);
 
   // --- 3. UPDATED TESTING FUNCTION (UPDATES REAL DATABASE) ---
   const simulateBackendConfirmation = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/appointments/confirm-payment', {
+      // 🚀 Live URL for confirmation
+      const response = await fetch(`${API_URL}/api/appointments/confirm-payment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ appointmentId: appointmentData.appointmentId })
