@@ -30,8 +30,13 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Vercel par Preflight (OPTIONS) request ko handle karne ke liye fallback
-app.options('*', cors());
+// 👇 NAYA FIX: Express 5.x aur Vercel ke liye Manual OPTIONS handler
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
 
 // 3. Middlewares
 // CORS ko allow kar rahe hain frontend (3000 ya 5173) ke liye
