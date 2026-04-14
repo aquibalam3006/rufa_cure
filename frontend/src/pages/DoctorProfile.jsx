@@ -44,6 +44,17 @@ function DoctorProfile() {
   // 1. DATA FETCH LOGIC (EFFECT)
   // ==========================================
   useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      const userObj = JSON.parse(userStr);
+      // Agar doctor ki profile incomplete hai, toh wapas form pe bhej do
+      if (userObj.role === 'doctor' && userObj.hasProfile === false) {
+         navigate('/doctor/setup-profile', { replace: true });
+      }
+    }
+  }, [navigate]);
+  
+  useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchDoctorData = async () => {

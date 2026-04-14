@@ -106,13 +106,13 @@ function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-xl">
             <h2 className="text-6xl font-extrabold leading-tight text-gray-900 mb-6">
-              The <span className="text-[#008985]">Best</span> Medical <br />
-              and Treatment <br />
-              Center for You
+             <span className="text-[#008985]">Trusted</span> Medical <br />
+              Care and Treatment <br />
+              for Every Family
             </h2>
             <p className="text-xl text-gray-700 leading-relaxed mb-10 max-w-lg">
-              We understand that injuries and acute pain can happen
-              unexpectedly. Our emergency specialists are here to support you.
+              Advanced Medical Care with a Human Touch.
+              Your Journey to Better Health Begins Here.
             </p>
             <button
               onClick={handleMakeAppointment}
