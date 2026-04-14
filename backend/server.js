@@ -18,13 +18,20 @@ const app = express();
 const cors = require('cors');
 
 
-const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+// ==========================================
+// 🚀 1. BULLETPROOF CORS SETUP FOR VERCEL
+// ==========================================
+const frontendUrl = process.env.FRONTEND_URL || 'https://rufa-cure-wwzk.vercel.app';
 
 app.use(cors({
-  origin: frontendUrl, 
-  credentials: true
+  origin: frontendUrl,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// Vercel par Preflight (OPTIONS) request ko handle karne ke liye fallback
+app.options('*', cors());
 
 // 3. Middlewares
 // CORS ko allow kar rahe hain frontend (3000 ya 5173) ke liye
