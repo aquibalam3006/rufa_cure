@@ -15,7 +15,7 @@ const prescriptionRoutes = require('./routes/prescriptions');
 const patientRoutes = require('./routes/patients');
 const adminRoutes = require('./routes/admin');
 const app = express();
-const cors = require('cors');
+
 
 
 // ==========================================
