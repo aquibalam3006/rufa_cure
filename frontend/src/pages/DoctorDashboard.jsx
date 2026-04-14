@@ -60,15 +60,24 @@ function DoctorDashboard() {
   const [transactionsList, setTransactionsList] = useState([]);
   const [patientReports, setPatientReports] = useState([]);
 
-
   // =========================================================
-  // 🔌 FETCH DOCTOR PROFILE FROM BACKEND (Live URL)
+  // 🛡️ ROUTE GUARD & 🔌 FETCH DOCTOR PROFILE FROM BACKEND
   // =========================================================
   useEffect(() => {
     const userStr = localStorage.getItem('user');
+    
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
+        
+        // 🛡️ ROUTE GUARD LOGIC
+        // Agar user doctor hai aur uski profile complete NAHI hai
+        if (userObj.role === 'doctor' && userObj.hasProfile === false) {
+           // Turant profile setup pe bhej do, replace: true se wo back button se nahi aa payega
+           navigate('/doctor/setup-profile', { replace: true });
+           return; // Yahan se aage ka code run mat karo
+        }
+
         const userId = userObj.id; // User ID from local storage
 
         // Initial naam set karna
@@ -103,7 +112,7 @@ function DoctorDashboard() {
       }
     } else {
       // Agar user login nahi hai toh login pe bhejo
-      navigate('/login');
+      navigate('/login', { replace: true });
     }
   }, [navigate, API_URL]);
 

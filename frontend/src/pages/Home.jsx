@@ -16,6 +16,24 @@ function Home() {
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [allDoctors, setAllDoctors] = useState([]);
 
+  // =========================================================
+  // 🛡️ ROUTE GUARD: Profile check for Doctor
+  // =========================================================
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      try {
+        const userObj = JSON.parse(userStr);
+        // Agar user doctor hai aur profile incomplete hai, toh seedha profile form par bhejo
+        if (userObj.role === 'doctor' && userObj.hasProfile === false) {
+           navigate('/doctor/setup-profile', { replace: true });
+        }
+      } catch (e) {
+        console.error("Failed to parse user data", e);
+      }
+    }
+  }, [navigate]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     // 🚀 Backend API ko call karna (Live URL)
