@@ -19,13 +19,14 @@ const app = express();
 
 
 // ==========================================
-// 🚀 BULLETPROOF CORS SETUP FOR LOCAL & VERCEL
+// 🚀 BULLETPROOF CORS SETUP FOR LOCAL, VERCEL & CUSTOM DOMAIN
 // ==========================================
-// Yahan hum array bana rahe hain taaki dono domains allow ho sakein
 const allowedOrigins = [
-  'http://localhost:5173', // Aapka Local Frontend
-  'https://rufa-cure-wwzk.vercel.app', // Aapka Live Frontend
-  process.env.FRONTEND_URL // Backup ke liye
+  'http://localhost:5173',               // Local Development
+  'https://rufa-cure-wwzk.vercel.app',   // Vercel Default Domain
+  'https://rufacure.in',                 // Aapka Naya Custom Domain (Without www)
+  'https://www.rufacure.in',             // Aapka Naya Custom Domain (With www)
+  process.env.FRONTEND_URL               // Backup
 ];
 
 app.use(cors({
@@ -34,6 +35,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log("CORS Blocked:", origin); // Debugging ke liye log
       callback(new Error('Not allowed by CORS'));
     }
   },
