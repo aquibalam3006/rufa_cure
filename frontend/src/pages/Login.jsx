@@ -100,7 +100,7 @@ function Login() {
           <div className="flex justify-center w-full my-4">
              <ReCAPTCHA
                 // Ye Google ka official Test Site Key hai. Live jaane se pehle isko change karna hota hai.
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
+                sitekey="6LeWs7gsAAAAAJ8Bfsc60yhNGZR8p8PwFfHFmrI9" 
                 onChange={handleCaptchaChange}
              />
           </div>
