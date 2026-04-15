@@ -89,14 +89,15 @@ function Navbar() {
       {/* =========================================
           SECTION 1: LOGO BLOCK (Left Side)
           ========================================= */}
+     {/* Logo Container */}
       <div
-        className="bg-white w-[250px] lg:w-[300px] flex items-center justify-center p-4 border-r border-gray-200 cursor-pointer flex-shrink-0"
+        className="flex items-center cursor-pointer px-4 lg:px-6 py-2 bg-white border-r border-gray-200 flex-shrink-0"
         onClick={() => navigate('/')}
       >
         <img
           src={myLogo}
-          alt="Logo"
-          className="h-16 w-auto object-contain"
+          alt="RuFa Cure Logo"
+          className="h-16 sm:h-20 lg:h-24 w-auto object-contain"
         />
       </div>
 
