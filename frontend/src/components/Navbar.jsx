@@ -151,28 +151,30 @@ function Navbar() {
 
           {/* 3. Login/Signup OR Logout Buttons (Right aligned) */}
           <div className="flex items-center justify-end gap-4 flex-1">
-            {isLoggedIn ? (
-              // 🚀 NAYA LOGGED-IN SECTION WITH PROFILE PICTURE
+           {isLoggedIn ? (
+              // 🚀 LOGGED-IN SECTION (Avatar on Right, Red Logout Button)
               <div className="flex items-center gap-4">
                 
-                {/* Profile Avatar & Name */}
+                {/* Profile Name & Avatar */}
                 <div 
                   className="flex items-center gap-3 cursor-pointer group" 
                   onClick={handleProfileClick}
                 >
-                  {/* Circular Placeholder Image */}
-                  <div className="hidden sm:flex w-10 h-10 rounded-full bg-white text-[#008985] items-center justify-center font-extrabold text-lg shadow-md border-2 border-white group-hover:scale-105 transition-transform">
-                    {userInitial || '👤'}
-                  </div>
+                  {/* User Name (Pehle aayega) */}
                   <span className="font-bold text-white text-sm md:text-base group-hover:text-gray-200 transition-colors hidden lg:block whitespace-nowrap">
                     Hi, {userName}
                   </span>
+
+                  {/* Circular Placeholder Image (Right side aayega) */}
+                  <div className="hidden sm:flex w-10 h-10 rounded-full bg-white text-[#008985] items-center justify-center font-extrabold text-lg shadow-md border-2 border-white group-hover:scale-105 transition-transform">
+                    {userInitial || '👤'}
+                  </div>
                 </div>
 
-                {/* Logout Button */}
+                {/* Logout Button (Wapas purana mast Red color!) */}
                 <button
                   onClick={handleLogout}
-                  className="px-5 py-2 border-2 border-transparent text-[#ef4444] bg-white font-bold rounded hover:bg-gray-100 transition text-sm shadow-md"
+                  className="bg-[#ef4444] text-white px-5 py-2 rounded-lg font-bold hover:bg-[#dc2626] transition shadow-md text-sm"
                 >
                   Logout
                 </button>
