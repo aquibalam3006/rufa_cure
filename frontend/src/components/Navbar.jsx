@@ -90,11 +90,11 @@ function Navbar() {
           SECTION 1: LOGO BLOCK (Left Side)
           ========================================= */}
       {/* Logo Container */}
-      <div className="flex items-center h-12 md:h-16 cursor-pointer" onClick={() => navigate('/')}>
+      <div className="flex items-center justify-center cursor-pointer py-1" onClick={() => navigate('/')}>
         <img
-          src={myLogo} // Ya jo bhi aapke logo variable ka naam hai
+          src={myLogo}
           alt="RuFa Cure"
-          className="h-full w-auto object-contain max-w-[180px] md:max-w-[220px]"
+          className="h-10 sm:h-12 md:h-14 w-auto object-contain"
         />
       </div>
 
