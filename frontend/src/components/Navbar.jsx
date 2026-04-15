@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import myLogo from '../assets/logo.png'; // Make sure extension is correct
+import myLogo from '../assets/logo.png'; 
 
 function Navbar() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
-  const [userRole, setUserRole] = useState('patient'); // Naya state role ke liye
+  const [userRole, setUserRole] = useState('patient'); 
+  const [userInitial, setUserInitial] = useState(''); // Avatar letter ke liye naya state
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -20,6 +21,7 @@ function Navbar() {
           const userObj = JSON.parse(userStr);
           const name = userObj.fullName || userObj.name || 'User';
           setUserName(name);
+          setUserInitial(name.charAt(0).toUpperCase()); // Avatar ka pehla letter nikal liya
 
           // SMART CHECK: Agar role doctor hai ya naam "Dr" se shuru hota hai
           if (userObj.role === 'doctor' || name.toLowerCase().startsWith('dr')) {
@@ -42,7 +44,8 @@ function Navbar() {
     localStorage.removeItem('user');
     setIsLoggedIn(false);
     setUserName('');
-    setUserRole('patient'); // Reset role
+    setUserRole('patient'); 
+    setUserInitial('');
 
     alert("Logged out successfully!");
     navigate('/');
@@ -57,39 +60,35 @@ function Navbar() {
     }
   };
 
-  // Profile click handler - Role ke hisaab se redirect
+  // Profile click handler
   const handleProfileClick = () => {
-    if (userRole === 'doctor') {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    // Agar doctor hai aur profile incomplete hai toh setup pe bhejo
+    if (user?.role === 'doctor' && user?.hasProfile === false) {
+      navigate('/doctor/setup-profile');
+    } else if (userRole === 'doctor') {
       navigate('/doctor-profile');
     } else {
       navigate('/profile');
     }
   };
 
-  // Naya function jo bottom menu ke clicks handle karega
   const handleMenuClick = (item) => {
-    if (item === 'Home') {
-      navigate('/');
-    } else if (item === 'Specialities') {
-      navigate('/doctors');
-    } else if (item === 'About Us') {
-      navigate('/about');
-    } else if (item === 'Service') {
-      navigate('/services');
-    } else if (item === 'Blog') {
-      navigate('/blog');
-    } else { // Baaki pages ke liye placeholder
-      console.log(`Navigating to ${item}`);
-    }
+    if (item === 'Home') navigate('/');
+    else if (item === 'Specialities') navigate('/doctors');
+    else if (item === 'About Us') navigate('/about');
+    else if (item === 'Service') navigate('/services');
+    else if (item === 'Blog') navigate('/blog');
+    else console.log(`Navigating to ${item}`);
   };
 
   return (
     <header className="sticky top-0 z-50 shadow-md flex w-full">
 
       {/* =========================================
-          SECTION 1: LOGO BLOCK (Left Side)
+          SECTION 1: LOGO BLOCK (Left Side) - FIXED SIZE
           ========================================= */}
-     {/* Logo Container */}
       <div
         className="flex items-center cursor-pointer px-4 lg:px-6 py-2 bg-white border-r border-gray-200 flex-shrink-0"
         onClick={() => navigate('/')}
@@ -109,21 +108,12 @@ function Navbar() {
         {/* --- TOP NAVBAR (White Background) --- */}
         <div className="bg-white px-8 py-2 flex justify-end items-center border-b border-gray-100">
           <div className="hidden md:flex items-center gap-6 text-[#005a57] text-xs font-bold">
-
-            <span
-              onClick={() => navigate('/doctors')}
-              className="cursor-pointer hover:text-[#008985] transition flex items-center gap-1"
-            >
+            <span onClick={() => navigate('/doctors')} className="cursor-pointer hover:text-[#008985] transition flex items-center gap-1">
               🩺 Find a Doctor
             </span>
-
-            <span
-              onClick={handleAppointmentClick}
-              className="cursor-pointer hover:text-[#008985] transition flex items-center gap-1"
-            >
+            <span onClick={handleAppointmentClick} className="cursor-pointer hover:text-[#008985] transition flex items-center gap-1">
               📅 Appointment
             </span>
-
             <span className="cursor-pointer hover:text-[#008985] transition flex items-center gap-1">
               🧪 Lab Report
             </span>
@@ -146,7 +136,7 @@ function Navbar() {
           {/* 1. Left Spacer (Perfect center ke liye zaruri hai) */}
           <div className="flex-1 hidden md:block"></div>
 
-          {/* 2. Main Nav Links (AB YE PERFECT MIDDLE MEIN AAYEGA AUR WORK KAREGA) */}
+          {/* 2. Main Nav Links */}
           <nav className="hidden md:flex items-center justify-center gap-8 text-sm lg:text-base text-white font-medium">
             {['Home', 'About Us', 'Specialities', 'Service', 'Blog'].map((item) => (
               <span
@@ -162,20 +152,32 @@ function Navbar() {
           {/* 3. Login/Signup OR Logout Buttons (Right aligned) */}
           <div className="flex items-center justify-end gap-4 flex-1">
             {isLoggedIn ? (
-              <>
-                <span className="text-white font-semibold hidden lg:block whitespace-nowrap">
-                  {/* YAHAN CLICK HANDLER CHANGE KIYA HAI */}
-                  <button onClick={handleProfileClick} className="font-bold text-white hover:text-gray-200 transition">
+              // 🚀 NAYA LOGGED-IN SECTION WITH PROFILE PICTURE
+              <div className="flex items-center gap-4">
+                
+                {/* Profile Avatar & Name */}
+                <div 
+                  className="flex items-center gap-3 cursor-pointer group" 
+                  onClick={handleProfileClick}
+                >
+                  {/* Circular Placeholder Image */}
+                  <div className="hidden sm:flex w-10 h-10 rounded-full bg-white text-[#008985] items-center justify-center font-extrabold text-lg shadow-md border-2 border-white group-hover:scale-105 transition-transform">
+                    {userInitial || '👤'}
+                  </div>
+                  <span className="font-bold text-white text-sm md:text-base group-hover:text-gray-200 transition-colors hidden lg:block whitespace-nowrap">
                     Hi, {userName}
-                  </button>
-                </span>
+                  </span>
+                </div>
+
+                {/* Logout Button */}
                 <button
                   onClick={handleLogout}
-                  className="px-5 py-1.5 border-2 border-red-400 text-white bg-red-500 font-bold rounded hover:bg-red-600 hover:border-red-600 transition text-sm shadow-sm"
+                  className="px-5 py-2 border-2 border-transparent text-[#ef4444] bg-white font-bold rounded hover:bg-gray-100 transition text-sm shadow-md"
                 >
                   Logout
                 </button>
-              </>
+                
+              </div>
             ) : (
               <>
                 <button
@@ -196,7 +198,6 @@ function Navbar() {
         </div>
 
       </div>
-
     </header>
   );
 }
