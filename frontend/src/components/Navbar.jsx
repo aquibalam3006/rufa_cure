@@ -97,7 +97,7 @@ function Navbar() {
         <img
           src={myLogo}
           alt="RuFa Cure Logo"
-          className="h-18 sm:h-22 lg:h-25 w-auto object-contain"
+          className="h-16 sm:h-20 lg:h-24 w-auto object-contain"
         />
       </div>
 
