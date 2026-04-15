@@ -1,23 +1,42 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
+import ReCAPTCHA from "react-google-recaptcha"; // 🚀 NAYA IMPORT
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  // 🚀 NAYE STATES (Loading aur Captcha ke liye)
+  const [isLoading, setIsLoading] = useState(false); 
+  const [captchaToken, setCaptchaToken] = useState(null); 
+  
   const navigate = useNavigate();
 
-  // 🚀 .env se backend ka URL nikalna
   const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+  // Jab Captcha tick hoga, tab ye function chalega
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // 🛡️ SECURITY CHECK: Agar Captcha tick nahi hai toh aage mat badho
+    if (!captchaToken) {
+      return alert("⚠️ Please verify that you are not a robot!");
+    }
+
+    // 🔄 SPINNER START (Button ghumna shuru)
+    setIsLoading(true);
+
     try {
-      // 🚀 BACKEND API CALL (Live URL)
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }), 
+        // Backend bhejte time captcha token bhi bhej sakte hain future me
+        body: JSON.stringify({ email, password, captchaToken }), 
       });
       
       const data = await response.json();
@@ -27,30 +46,29 @@ function Login() {
         localStorage.setItem('token', data.token); 
         
         const userRole = data.user.role; 
-        const hasProfile = data.user.hasProfile; // Backend se aaya flag check karo
+        const hasProfile = data.user.hasProfile; 
         
-        // ==========================================
-        // NAYA SMART REDIRECT LOGIC
-        // ==========================================
+        // Smart Redirect Logic
         if (userRole === 'doctor') {
           if (hasProfile) {
-             // Agar profile ban chuki hai -> Direct Dashboard!
              navigate('/doctor-dashboard'); 
           } else {
-             // Agar pehli baar aaya hai -> Setup Profile
              navigate('/doctor/setup-profile'); 
           }
         } else if (userRole === 'admin') {
           navigate('/admin-dashboard'); 
         } else {
-          navigate('/'); // Patient
+          navigate('/'); 
         }
-        
       } else {
         alert('Failed: ' + data.message);
       }
     } catch (error) { 
       console.error('Error:', error); 
+      alert("Something went wrong! Please try again.");
+    } finally {
+      // 🛑 SPINNER STOP (Login ho gaya ya error aaya, button wapas normal karo)
+      setIsLoading(false);
     }
   };
 
@@ -77,7 +95,36 @@ function Login() {
              </div>
              <Link to="/forgot-password" className="font-bold text-[#008985] hover:text-[#005a57]">Forgot password</Link>
           </div>
-          <button type="submit" className="w-full bg-[#008985] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#005a57] transition shadow-md">Sign in</button>
+
+          {/* 🤖 GOOGLE reCAPTCHA WIDGET */}
+          <div className="flex justify-center w-full my-4">
+             <ReCAPTCHA
+                // Ye Google ka official Test Site Key hai. Live jaane se pehle isko change karna hota hai.
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
+                onChange={handleCaptchaChange}
+             />
+          </div>
+
+          {/* 🔄 SUBMIT BUTTON WITH LOADING SPINNER */}
+          <button 
+            type="submit" 
+            disabled={isLoading} 
+            className={`w-full text-white font-bold py-3 px-4 rounded-lg transition shadow-md flex justify-center items-center gap-3 
+              ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#008985] hover:bg-[#005a57]'}`}
+          >
+            {isLoading ? (
+              <>
+                {/* Spinner SVG */}
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing in...
+              </>
+            ) : (
+              "Sign in"
+            )}
+          </button>
         </form>
         <p className="text-center text-sm font-medium text-gray-500 pt-8">
             Don’t have an account? <Link to="/register" className="font-bold text-[#008985] hover:text-[#005a57]">Sign up</Link>
