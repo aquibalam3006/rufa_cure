@@ -114,43 +114,50 @@ function AppointmentPage() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
       <Navbar />
-      <div className="flex-grow flex items-center justify-center p-6 md:p-12">
-        <div className="max-w-6xl w-full flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden relative bg-white">
-          <div className="md:w-2/5 bg-[#008985] text-white p-10 flex flex-col relative">
-            <h2 className="text-3xl font-bold mb-10 z-10">Make an Appointment</h2>
-            <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg flex items-start gap-4 z-10 w-full md:-mr-12 border-l-4 border-[#e75a31]">
-              <div className="bg-red-50 text-[#e75a31] p-3 rounded-full text-2xl flex-shrink-0">📅</div>
+      {/* Mobile par padding kam, Laptop par zyada */}
+      <div className="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-12">
+        <div className="max-w-6xl w-full flex flex-col md:flex-row shadow-2xl rounded-2xl md:rounded-lg overflow-hidden relative bg-white">
+          
+          {/* LEFT SIDE (TEAL PANEL) */}
+          <div className="w-full md:w-2/5 bg-[#008985] text-white p-8 sm:p-10 flex flex-col relative z-10">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 md:mb-10 z-10">Make an Appointment</h2>
+            
+            {/* Overlapping Contact Card: Mobile par margin bottom, Desktop par margin right nikalna */}
+            <div className="bg-white text-gray-800 p-5 sm:p-6 rounded-lg shadow-lg flex items-start gap-4 z-10 w-full md:w-auto md:-mr-16 lg:-mr-12 border-l-4 border-[#e75a31] mb-4 md:mb-0">
+              <div className="bg-red-50 text-[#e75a31] p-3 rounded-full text-xl sm:text-2xl flex-shrink-0">📅</div>
               <div>
-                <h4 className="font-bold text-lg mb-1">For Appointments</h4>
-                <p className="text-gray-600 font-medium">+91 8447 666 333</p>
-                <p className="text-gray-600 font-medium text-sm mt-1">info@rufacure.com</p>
+                <h4 className="font-bold text-base sm:text-lg mb-1">For Appointments</h4>
+                <p className="text-gray-600 font-medium text-sm sm:text-base">+91 8447 666 333</p>
+                <p className="text-gray-600 font-medium text-xs sm:text-sm mt-1">info@rufacure.com</p>
               </div>
             </div>
+            
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#005a57] opacity-20 transform -skew-y-6 z-0"></div>
           </div>
 
-          <div className="md:w-3/5 bg-white p-8 md:p-12 pl-12 md:pl-20">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {/* RIGHT SIDE (FORM PANEL) */}
+          <div className="w-full md:w-3/5 bg-white p-6 sm:p-8 md:p-12 md:pl-20">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">Name*</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] font-medium" required />
+                <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Name*</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] font-medium text-sm sm:text-base" required />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile*</label>
-                  <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] font-medium" required />
+                  <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Mobile*</label>
+                  <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] font-medium text-sm sm:text-base" required />
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] font-medium" />
+                  <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Email</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] font-medium text-sm sm:text-base" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">Speciality*</label>
-                  <select name="speciality" value={formData.speciality} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] cursor-pointer font-medium" required>
+                  <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Speciality*</label>
+                  <select name="speciality" value={formData.speciality} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] cursor-pointer font-medium text-sm sm:text-base bg-white" required>
                     <option value="">Select Speciality</option>
                     {allDoctors.map(d => d.speciality).filter((v, i, a) => a.indexOf(v) === i).map(spec => (
                       <option key={spec} value={spec}>{spec}</option>
@@ -158,8 +165,8 @@ function AppointmentPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-2">Doctor*</label>
-                  <select name="doctor" value={formData.doctor} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] cursor-pointer font-medium" required disabled={!formData.speciality}>
+                  <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Doctor*</label>
+                  <select name="doctor" value={formData.doctor} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] cursor-pointer font-medium text-sm sm:text-base bg-white" required disabled={!formData.speciality}>
                     <option value="">Select Doctor</option>
                     {availableDoctors.map((doc, index) => (
                       <option key={index} value={doc.name}>{doc.name}</option>
@@ -169,17 +176,17 @@ function AppointmentPage() {
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">Date Time*</label>
-                <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] text-gray-600 font-medium" required />
+                <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Date Time*</label>
+                <input type="datetime-local" name="dateTime" value={formData.dateTime} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] text-gray-600 font-medium text-sm sm:text-base bg-white" required />
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">Message*</label>
-                <textarea rows="3" name="message" value={formData.message} onChange={handleChange} className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#008985] font-medium" required></textarea>
+                <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Message*</label>
+                <textarea rows="3" name="message" value={formData.message} onChange={handleChange} className="w-full border border-gray-300 p-2.5 sm:p-3 rounded focus:outline-none focus:border-[#008985] font-medium text-sm sm:text-base resize-none" required></textarea>
               </div>
 
-              <div className="pt-2">
-                <button type="submit" className="bg-[#008985] text-white font-bold py-3 px-10 rounded hover:bg-[#005a57] transition shadow-md">
+              <div className="pt-2 sm:pt-4">
+                <button type="submit" className="w-full sm:w-auto bg-[#008985] text-white font-bold py-3 px-8 sm:px-10 rounded-lg hover:bg-[#005a57] transition shadow-md text-sm sm:text-base">
                   Proceed to Payment
                 </button>
               </div>

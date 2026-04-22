@@ -129,48 +129,50 @@ function LabTests() {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      <div className="bg-gradient-to-r from-[#008985] to-[#005a57] py-16 px-8 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mt-10 -mr-10"></div>
-        <div className="absolute bottom-0 right-40 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>
+      <div className="bg-gradient-to-r from-[#008985] to-[#005a57] py-10 sm:py-16 px-4 sm:px-8 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-40 sm:w-64 sm:h-64 bg-white opacity-5 rounded-full -mt-10 -mr-10"></div>
+        <div className="absolute bottom-0 right-20 sm:right-40 w-24 h-24 sm:w-32 sm:h-32 bg-white opacity-10 rounded-full blur-xl sm:blur-2xl"></div>
         
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-          <div className="lg:w-3/5 text-center lg:text-left">
-            <span className="bg-white/20 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">NABL Accredited Labs</span>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-              Book Lab Tests at Home.<br />Safe, Hygienic & Fast.
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 sm:gap-12 relative z-10">
+          <div className="w-full lg:w-3/5 text-center lg:text-left">
+            <span className="bg-white/20 text-white text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3 sm:mb-4 inline-block">NABL Accredited Labs</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 leading-tight">
+              Book Lab Tests at Home.<br className="hidden sm:block"/> Safe, Hygienic & Fast.
             </h1>
-            <p className="text-lg text-teal-100 font-medium leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-sm sm:text-base md:text-lg text-teal-100 font-medium leading-relaxed mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 px-2 sm:px-0">
               Get accurate reports from our certified labs delivered straight to your phone. 100% safe home sample collection by trained professionals.
             </p>
             
             {/* Search Bar in Hero */}
-            <div className="bg-white p-2 rounded-2xl flex max-w-lg mx-auto lg:mx-0 shadow-lg">
-              <span className="text-gray-400 text-xl pl-4 py-3">🔍</span>
-              <input 
-                type="text" 
-                placeholder="Search for tests or packages..." 
-                className="flex-1 bg-transparent border-none outline-none px-3 text-gray-800 font-medium"
-              />
-              <button className="bg-[#008985] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#005a57] transition">
+            <div className="bg-white p-2 rounded-xl sm:rounded-2xl flex flex-col sm:flex-row max-w-lg mx-auto lg:mx-0 shadow-lg gap-2 sm:gap-0">
+              <div className="flex items-center flex-1 px-2 sm:px-0">
+                 <span className="text-gray-400 text-lg sm:text-xl pl-2 sm:pl-4 py-2 sm:py-3">🔍</span>
+                 <input 
+                   type="text" 
+                   placeholder="Search tests or packages..." 
+                   className="w-full bg-transparent border-none outline-none px-3 text-gray-800 font-medium text-sm sm:text-base"
+                 />
+              </div>
+              <button className="w-full sm:w-auto bg-[#008985] text-white px-6 py-3 rounded-lg sm:rounded-xl font-bold hover:bg-[#005a57] transition text-sm sm:text-base">
                 Search
               </button>
             </div>
           </div>
 
-          {/* Upload Prescription Card (Apollo Style) */}
-          <div className="lg:w-2/5 w-full max-w-md">
-            <div className="bg-white text-gray-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-orange-100 text-orange-600 text-xs font-extrabold px-3 py-1 rounded-bl-xl">Quick Book</div>
-              <h3 className="text-2xl font-extrabold mb-2">Have a Prescription?</h3>
-              <p className="text-sm text-gray-500 font-medium mb-6">Upload it and we will create your cart instantly.</p>
+          {/* Upload Prescription Card */}
+          <div className="w-full lg:w-2/5 max-w-md">
+            <div className="bg-white text-gray-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-orange-100 text-orange-600 text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-bl-lg sm:rounded-bl-xl">Quick Book</div>
+              <h3 className="text-xl sm:text-2xl font-extrabold mb-1 sm:mb-2">Have a Prescription?</h3>
+              <p className="text-xs sm:text-sm text-gray-500 font-medium mb-4 sm:mb-6">Upload it and we will create your cart instantly.</p>
               
-              <div className="border-2 border-dashed border-[#b3e5e1] bg-[#f8fdfc] rounded-2xl p-8 text-center cursor-pointer hover:bg-[#e6f4f4] transition">
-                <span className="text-4xl block mb-2 text-[#008985]">📄</span>
-                <p className="font-bold text-[#008985]">Click to Upload Prescription</p>
-                <p className="text-xs text-gray-400 mt-1">JPG, PNG or PDF</p>
+              <div className="border-2 border-dashed border-[#b3e5e1] bg-[#f8fdfc] rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center cursor-pointer hover:bg-[#e6f4f4] transition">
+                <span className="text-3xl sm:text-4xl block mb-2 text-[#008985]">📄</span>
+                <p className="font-bold text-[#008985] text-sm sm:text-base">Click to Upload Prescription</p>
+                <p className="text-[10px] sm:text-xs text-gray-400 mt-1">JPG, PNG or PDF</p>
               </div>
               
-              <button className="w-full mt-6 bg-gray-900 text-white py-3.5 rounded-xl font-bold hover:bg-gray-800 transition shadow-md">
+              <button className="w-full mt-4 sm:mt-6 bg-gray-900 text-white py-3 sm:py-3.5 rounded-lg sm:rounded-xl font-bold hover:bg-gray-800 transition shadow-md text-sm sm:text-base">
                 Request Call Back
               </button>
             </div>
@@ -179,68 +181,68 @@ function LabTests() {
       </div>
 
       {/* --- TRUST BADGES --- */}
-      <div className="bg-white border-b border-gray-200 py-6">
-        <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-center md:justify-between items-center gap-6 text-center">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-xl">🔬</div>
-            <div className="text-left"><p className="font-extrabold text-gray-900 text-sm">NABL Certified</p><p className="text-xs text-gray-500 font-medium">100% Accurate Labs</p></div>
+      <div className="bg-white border-b border-gray-200 py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center md:text-left justify-items-center md:justify-items-start">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 text-center md:text-left">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-lg sm:text-xl shrink-0">🔬</div>
+            <div><p className="font-extrabold text-gray-900 text-xs sm:text-sm">NABL Certified</p><p className="text-[10px] sm:text-xs text-gray-500 font-medium">100% Accurate Labs</p></div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-xl">🏡</div>
-            <div className="text-left"><p className="font-extrabold text-gray-900 text-sm">Free Home Collection</p><p className="text-xs text-gray-500 font-medium">Safe & Hygienic</p></div>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 text-center md:text-left">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-lg sm:text-xl shrink-0">🏡</div>
+            <div><p className="font-extrabold text-gray-900 text-xs sm:text-sm">Home Collection</p><p className="text-[10px] sm:text-xs text-gray-500 font-medium">Safe & Hygienic</p></div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-xl">⏱️</div>
-            <div className="text-left"><p className="font-extrabold text-gray-900 text-sm">Fast Reports</p><p className="text-xs text-gray-500 font-medium">View online instantly</p></div>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 text-center md:text-left">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-lg sm:text-xl shrink-0">⏱️</div>
+            <div><p className="font-extrabold text-gray-900 text-xs sm:text-sm">Fast Reports</p><p className="text-[10px] sm:text-xs text-gray-500 font-medium">View online instantly</p></div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-xl">👨‍⚕️</div>
-            <div className="text-left"><p className="font-extrabold text-gray-900 text-sm">Free Doctor Consult</p><p className="text-xs text-gray-500 font-medium">On specific packages</p></div>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 text-center md:text-left">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-lg sm:text-xl shrink-0">👨‍⚕️</div>
+            <div><p className="font-extrabold text-gray-900 text-xs sm:text-sm">Free Consult</p><p className="text-[10px] sm:text-xs text-gray-500 font-medium">On specific packages</p></div>
           </div>
         </div>
       </div>
 
       {/* --- TOP TESTS GRID --- */}
-      <div className="max-w-7xl mx-auto px-8 py-20 w-full">
-        <div className="flex justify-between items-end mb-10 border-b border-gray-100 pb-4">
-          <div>
-            <h2 className="text-3xl font-extrabold text-gray-900">Popular Tests & Profiles</h2>
-            <p className="text-gray-500 font-medium mt-2">Book individual tests or complete health profiles.</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-20 w-full">
+        <div className="flex justify-between items-end mb-6 sm:mb-10 border-b border-gray-100 pb-3 sm:pb-4 text-center sm:text-left">
+          <div className="w-full sm:w-auto">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">Popular Tests & Profiles</h2>
+            <p className="text-xs sm:text-sm text-gray-500 font-medium mt-1.5 sm:mt-2">Book individual tests or complete health profiles.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
           {labTestsData.map((test) => (
-            <div key={test.id} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col relative overflow-hidden group">
+            <div key={test.id} className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm border border-gray-100 hover:shadow-xl transition duration-300 flex flex-col relative overflow-hidden group">
               
-              <div className="absolute top-4 right-4 bg-red-100 text-red-600 text-[10px] font-extrabold px-2 py-1 rounded">
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-red-100 text-red-600 text-[9px] sm:text-[10px] font-extrabold px-2 py-1 rounded">
                 {test.discount}
               </div>
 
-              <span className="text-xs font-extrabold text-[#008985] uppercase tracking-wider mb-2">{test.category}</span>
-              <h3 className="text-xl font-extrabold text-gray-900 mb-4 pr-12 leading-tight">{test.name}</h3>
+              <span className="text-[10px] sm:text-xs font-extrabold text-[#008985] uppercase tracking-wider mb-1.5 sm:mb-2">{test.category}</span>
+              <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 mb-3 sm:mb-4 pr-12 leading-snug">{test.name}</h3>
               
-              <div className="bg-gray-50 rounded-xl p-4 mb-6 grid grid-cols-2 gap-4 border border-gray-100">
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 grid grid-cols-2 gap-3 sm:gap-4 border border-gray-100">
                 <div>
-                  <p className="text-xs text-gray-400 font-bold mb-1">Includes</p>
-                  <p className="text-sm font-bold text-gray-800">{test.parameters} Parameters</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 font-bold mb-0.5 sm:mb-1">Includes</p>
+                  <p className="text-xs sm:text-sm font-bold text-gray-800">{test.parameters} Parameters</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-bold mb-1">Report Time</p>
-                  <p className="text-sm font-bold text-gray-800">{test.reportTime}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 font-bold mb-0.5 sm:mb-1">Report Time</p>
+                  <p className="text-xs sm:text-sm font-bold text-gray-800">{test.reportTime}</p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-xs text-gray-400 font-bold mb-1">Pre-test Information</p>
-                  <p className="text-sm font-bold text-gray-800">{test.fasting}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 font-bold mb-0.5 sm:mb-1">Pre-test Information</p>
+                  <p className="text-xs sm:text-sm font-bold text-gray-800">{test.fasting}</p>
                 </div>
               </div>
 
-              <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
+              <div className="mt-auto flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-50">
                 <div>
-                  <p className="text-xs text-gray-400 line-through font-bold">₹{test.originalPrice}</p>
-                  <p className="text-2xl font-extrabold text-gray-900">₹{test.price}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-400 line-through font-bold">₹{test.originalPrice}</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-gray-900">₹{test.price}</p>
                 </div>
-                <button className="bg-white border-2 border-[#008985] text-[#008985] hover:bg-[#008985] hover:text-white font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
+                <button className="bg-white border-2 border-[#008985] text-[#008985] hover:bg-[#008985] hover:text-white font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow-sm text-sm sm:text-base">
                   Add to Cart
                 </button>
               </div>
@@ -250,36 +252,36 @@ function LabTests() {
       </div>
 
       {/* --- HOW IT WORKS SECTION --- */}
-      <div className="bg-[#f8fdfc] py-20 border-y border-[#b3e5e1]/30">
-        <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-12">How Home Sample Collection Works</h2>
+      <div className="bg-[#f8fdfc] py-12 sm:py-20 border-y border-[#b3e5e1]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-8 sm:mb-12">How Home Sample Collection Works</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
             {/* Connecting line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-[#b3e5e1] -translate-y-1/2 z-0"></div>
+            <div className="hidden md:block absolute top-[40px] sm:top-1/2 left-0 w-full h-1 bg-[#b3e5e1] -translate-y-1/2 z-0"></div>
 
             <div className="relative z-10 flex flex-col items-center">
-              <div className="w-20 h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-3xl shadow-lg mb-4 text-[#008985]">📱</div>
-              <h4 className="font-extrabold text-gray-900 mb-2">Book Online</h4>
-              <p className="text-sm text-gray-600 font-medium">Select your test, choose a time slot, and confirm booking.</p>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-2xl sm:text-3xl shadow-lg mb-3 sm:mb-4 text-[#008985]">📱</div>
+              <h4 className="font-extrabold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Book Online</h4>
+              <p className="text-xs sm:text-sm text-gray-600 font-medium px-2 sm:px-0">Select your test, choose a time slot, and confirm booking.</p>
             </div>
             
             <div className="relative z-10 flex flex-col items-center">
-              <div className="w-20 h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-3xl shadow-lg mb-4 text-[#008985]">🛵</div>
-              <h4 className="font-extrabold text-gray-900 mb-2">Home Visit</h4>
-              <p className="text-sm text-gray-600 font-medium">Our trained phlebotomist visits your home at the requested time.</p>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-2xl sm:text-3xl shadow-lg mb-3 sm:mb-4 text-[#008985]">🛵</div>
+              <h4 className="font-extrabold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Home Visit</h4>
+              <p className="text-xs sm:text-sm text-gray-600 font-medium px-2 sm:px-0">Our trained phlebotomist visits your home at the requested time.</p>
             </div>
 
             <div className="relative z-10 flex flex-col items-center">
-              <div className="w-20 h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-3xl shadow-lg mb-4 text-[#008985]">🧪</div>
-              <h4 className="font-extrabold text-gray-900 mb-2">Lab Processing</h4>
-              <p className="text-sm text-gray-600 font-medium">Sample is safely transported to our NABL certified labs for testing.</p>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-2xl sm:text-3xl shadow-lg mb-3 sm:mb-4 text-[#008985]">🧪</div>
+              <h4 className="font-extrabold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Lab Processing</h4>
+              <p className="text-xs sm:text-sm text-gray-600 font-medium px-2 sm:px-0">Sample is safely transported to our NABL certified labs for testing.</p>
             </div>
 
             <div className="relative z-10 flex flex-col items-center">
-              <div className="w-20 h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-3xl shadow-lg mb-4 text-[#008985]">📊</div>
-              <h4 className="font-extrabold text-gray-900 mb-2">Get Reports</h4>
-              <p className="text-sm text-gray-600 font-medium">View and download your reports securely from the RuFa Cure app.</p>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white border-4 border-[#008985] rounded-full flex items-center justify-center text-2xl sm:text-3xl shadow-lg mb-3 sm:mb-4 text-[#008985]">📊</div>
+              <h4 className="font-extrabold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Get Reports</h4>
+              <p className="text-xs sm:text-sm text-gray-600 font-medium px-2 sm:px-0">View and download your reports securely from the RuFa Cure app.</p>
             </div>
           </div>
         </div>

@@ -115,12 +115,12 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full bg-gray-50 border-t border-gray-100 text-gray-700 px-8 md:px-16 py-12 font-sans">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+    <footer className="w-full bg-gray-50 border-t border-gray-100 text-gray-700 px-6 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-10 md:py-12 font-sans">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10">
         
         {footerData.map((section, sectionIndex) => (
           <div key={sectionIndex} className="footer-column">
-            <h4 className="text-lg font-bold text-[#008985] mb-4 uppercase tracking-wider">
+            <h4 className="text-base sm:text-lg font-bold text-[#008985] mb-3 sm:mb-4 uppercase tracking-wider">
               {section.title}
             </h4>
             
@@ -129,7 +129,7 @@ function Footer() {
                 <li key={linkIndex}>
                   <button 
                     onClick={(e) => handleLinkClick(e, link.path)} 
-                    className="text-left hover:text-[#008985] transition-colors duration-200 cursor-pointer w-full"
+                    className="text-left hover:text-[#008985] transition-colors duration-200 cursor-pointer w-full focus:outline-none"
                   >
                     {link.name}
                   </button>
@@ -142,13 +142,13 @@ function Footer() {
       </div>
 
       {/* --- BOTTOM BAR (Logo added here) --- */}
-      <div className="max-w-7xl mx-auto border-t border-gray-100 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 gap-4">
-        <p>&copy; {new Date().getFullYear()} RuFa Cure. All rights reserved.</p>
-        <div className="flex items-center gap-3">
+      <div className="max-w-7xl mx-auto border-t border-gray-100 mt-10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-gray-500 gap-4 sm:gap-0">
+        <p className="text-center sm:text-left">&copy; {new Date().getFullYear()} RuFa Cure. All rights reserved.</p>
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
            {/* Text ki jagah Logo laga diya gaya hai */}
-           <img src={myLogo} alt="RuFa Cure Logo" className="h-8 w-auto object-contain cursor-pointer" onClick={() => navigate('/')} />
-           <span className="text-gray-300 font-light">|</span>
-           <span className="text-gray-400 font-medium">Quality Healthcare</span>
+           <img src={myLogo} alt="RuFa Cure Logo" className="h-6 sm:h-8 w-auto object-contain cursor-pointer" onClick={() => navigate('/')} />
+           <span className="hidden sm:inline-block text-gray-300 font-light">|</span>
+           <span className="text-gray-400 font-medium text-center sm:text-left">Quality Healthcare</span>
         </div>
       </div>
     </footer>

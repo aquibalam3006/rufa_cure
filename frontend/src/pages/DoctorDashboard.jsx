@@ -231,8 +231,7 @@ function DoctorDashboard() {
 
 
   return (
-    <div className="flex h-screen bg-[#f4f7f9] font-sans overflow-hidden text-gray-800 relative">
-      
+    <div className="flex min-h-screen bg-[#f4f7f9] font-sans overflow-hidden text-gray-800 relative">
       {/* Hidden File Inputs */}
       <input type="file" ref={patientFileRef} onChange={handlePatientFileUpload} accept=".pdf,.png,.jpg" className="hidden" />
       <input type="file" ref={profilePicRef} onChange={handleProfilePicChange} accept="image/*" className="hidden" />
@@ -287,7 +286,7 @@ function DoctorDashboard() {
         <div className="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-40 transition-opacity" onClick={() => setIsSidebarOpen(false)}></div>
       )}
       
-      <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#008985] text-white flex flex-col transition-transform duration-300 ease-in-out shadow-2xl ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-y-0 left-0 z-50 w-[85%] sm:w-72 bg-[#008985] text-white flex flex-col transition-transform duration-300 ease-in-out shadow-2xl ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 border-b border-teal-700/50 flex items-center justify-between">
           <div className="bg-white p-2 rounded-lg cursor-pointer" onClick={() => navigate('/')}>
              <img src={myLogo} alt="RuFa Cure" className="h-8 w-auto object-contain" />
@@ -319,7 +318,7 @@ function DoctorDashboard() {
             <button className="text-3xl text-gray-700 hover:text-[#008985] focus:outline-none" onClick={() => setIsSidebarOpen(true)}>☰</button>
             <div className="relative hidden sm:block ml-4">
               <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-              <input type="text" placeholder="Search Anything..." className="pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full focus:bg-white focus:border-[#008985] outline-none text-sm w-64 md:w-80 transition" />
+              <input type="text" placeholder="Search Anything..." className="pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full focus:bg-white focus:border-[#008985] outline-none text-sm w-full sm:w-64 md:w-80 transition" />
             </div>
           </div>
           
@@ -346,7 +345,7 @@ function DoctorDashboard() {
         </div>
 
         {/* MAIN TAB CONTENTS (SCROLLABLE AREA) */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8">
           
           {/* CENTER WIDE COLUMN */}
           <div className="flex-1 flex flex-col gap-8 min-w-0">
@@ -448,7 +447,7 @@ function DoctorDashboard() {
 
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                   <h3 className="text-xl font-bold text-gray-800 mb-6">Recent Patients</h3>
-                  <div className="w-full overflow-x-auto">
+                  <div className="w-full overflow-x-auto scrollbar-hide">
                     <table className="w-full text-left text-sm whitespace-nowrap">
                       <thead className="text-gray-400 font-bold border-b border-gray-100">
                         <tr>
@@ -505,7 +504,7 @@ function DoctorDashboard() {
                     ))}
                   </div>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto scrollbar-hide">
                   <table className="w-full text-left whitespace-nowrap">
                     <thead className="text-gray-400 text-sm font-bold border-b border-gray-100">
                       <tr>
@@ -566,7 +565,7 @@ function DoctorDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                      <input type="text" placeholder="Search patients..." className="pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:border-blue-500 outline-none text-sm font-medium w-64 shadow-sm transition" />
+                      <input type="text" placeholder="Search patients..." className="pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:border-blue-500 outline-none text-sm font-medium w-full sm:w-64 md:w-80 shadow-sm transition" />
                     </div>
                     <button className="bg-blue-500 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-600 transition shadow-md flex items-center gap-2">
                       <span>+</span> Add New
@@ -916,7 +915,7 @@ function DoctorDashboard() {
 
             {/* =============== 4. MESSAGES TAB =============== */}
             {activeTab === 'Messages' && (
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 flex overflow-hidden w-full h-[600px]">
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 flex overflow-hidden w-full h-[calc(100vh-140px)]">
                 <div className="w-1/3 border-r border-gray-100 flex flex-col bg-gray-50/30">
                   <div className="p-6 border-b border-gray-100 bg-white shrink-0">
                     <h2 className="text-2xl font-extrabold text-gray-800 mb-4">Messages</h2>
@@ -1024,7 +1023,7 @@ function DoctorDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                      <input type="text" placeholder="Search medicines..." className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-[#008985] outline-none text-sm font-medium w-64 transition" />
+                      <input type="text" placeholder="Search medicines..." className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-[#008985] outline-none text-sm font-medium w-full sm:w-64 md:w-80 transition" />
                     </div>
                     <button onClick={() => setIsAddMedModalOpen(true)} className="bg-[#008985] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#005a57] transition shadow-sm flex items-center gap-2 cursor-pointer">
                       <span>+</span> Add Medicine
@@ -1032,7 +1031,7 @@ function DoctorDashboard() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                    <div className="bg-[#e6f4f4] p-4 rounded-2xl border border-[#b3e5e1]">
                      <p className="text-gray-500 text-xs font-bold mb-1">Total Medicines</p>
                      <p className="text-2xl font-extrabold text-[#008985]">{medications.length}</p>
@@ -1051,7 +1050,7 @@ function DoctorDashboard() {
                    </div>
                 </div>
 
-                <div className="overflow-x-auto border border-gray-100 rounded-2xl">
+                <div className="overflow-x-auto scrollbar-hide border border-gray-100 rounded-2xl">
                   <table className="w-full text-left whitespace-nowrap">
                     <thead className="bg-gray-50 text-gray-500 text-xs font-bold uppercase tracking-wider">
                       <tr>
@@ -1107,7 +1106,7 @@ function DoctorDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                      <input type="text" placeholder="Search documents..." className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-[#008985] outline-none text-sm font-medium w-64 transition" />
+                      <input type="text" placeholder="Search documents..." className="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-[#008985] outline-none text-sm font-medium w-full sm:w-64 md:w-80 transition" />
                     </div>
                     <button onClick={() => generalDocRef.current.click()} className="bg-[#008985] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#005a57] transition shadow-sm flex items-center gap-2 cursor-pointer">
                       <span>⬆️</span> Upload New
@@ -1115,7 +1114,7 @@ function DoctorDashboard() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                    <div className="bg-[#e6f4f4] p-4 rounded-2xl border border-[#b3e5e1]">
                      <p className="text-gray-500 text-xs font-bold mb-1">Total Documents</p>
                      <p className="text-2xl font-extrabold text-[#008985]">{documents.length}</p>
@@ -1134,7 +1133,7 @@ function DoctorDashboard() {
                    </div>
                 </div>
 
-                <div className="overflow-x-auto border border-gray-100 rounded-2xl">
+                <div className="overflow-x-auto scrollbar-hide border border-gray-100 rounded-2xl">
                   <table className="w-full text-left whitespace-nowrap">
                     <thead className="bg-gray-50 text-gray-500 text-xs font-bold uppercase tracking-wider">
                       <tr>
@@ -1204,7 +1203,7 @@ function DoctorDashboard() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                    <div className="bg-[#e6f4f4] p-5 rounded-2xl border border-[#b3e5e1]">
                      <p className="text-[#008985] text-xs font-bold mb-1">Total Revenue</p>
                      <p className="text-3xl font-extrabold text-gray-800">$0</p>
@@ -1227,7 +1226,7 @@ function DoctorDashboard() {
                    </div>
                 </div>
 
-                <div className="overflow-x-auto border border-gray-100 rounded-2xl">
+                <div className="overflow-x-auto scrollbar-hide border border-gray-100 rounded-2xl">
                   <table className="w-full text-left whitespace-nowrap">
                     <thead className="bg-gray-50 text-gray-500 text-xs font-bold uppercase tracking-wider">
                       <tr>
@@ -1362,7 +1361,7 @@ function DoctorDashboard() {
 
           {/* ================= RIGHT COLUMN (ONLY VISIBLE ON DASHBOARD TAB) ================= */}
           {activeTab === 'Dashboard' && !selectedPatient && (
-            <div className="w-full lg:w-80 bg-white rounded-3xl h-fit p-6 flex flex-col gap-8 shadow-sm shrink-0 border border-gray-100">
+            <div className="w-full lg:w-80 xl:w-80 bg-white rounded-3xl h-fit p-6 flex flex-col gap-8 shadow-sm shrink-0 border border-gray-100">
               
               <div className="text-center pt-4">
                  <div className="w-32 h-32 mx-auto rounded-3xl bg-[#b3e5e1] flex items-center justify-center mb-5 shadow-inner overflow-hidden border-4 border-white shadow-lg">

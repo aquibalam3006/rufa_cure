@@ -32,26 +32,26 @@ function Register() {
 
   return (
     <AuthLayout>
-        <div className="text-center mb-8">
-            <h2 className="text-3xl font-extrabold text-gray-900 leading-snug">Create an Account</h2>
-            <p className="text-sm text-gray-500 font-medium mt-2">Book Better, Feel Better – With a Personal Touch.</p>
+        <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-snug">Create an Account</h2>
+            <p className="text-xs sm:text-sm text-gray-500 font-medium mt-1.5 sm:mt-2">Book Better, Feel Better – With a Personal Touch.</p>
         </div>
-        <form onSubmit={handleRegister} className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-4 sm:space-y-5">
           
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Register as</label>
-            <div className="grid grid-cols-2 gap-4">
+            <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Register as</label>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <button
                 type="button"
                 onClick={() => setRole('patient')}
-                className={`py-2 px-4 rounded-lg font-bold border-2 transition ${role === 'patient' ? 'bg-[#008985] border-[#008985] text-white' : 'bg-gray-50 border-gray-200 text-gray-500 hover:border-[#008985]'}`}
+                className={`py-2 px-2 sm:px-4 rounded-lg font-bold border-2 transition text-sm sm:text-base ${role === 'patient' ? 'bg-[#008985] border-[#008985] text-white' : 'bg-gray-50 border-gray-200 text-gray-500 hover:border-[#008985]'}`}
               >
                 🏥 Patient
               </button>
               <button
                 type="button"
                 onClick={() => setRole('doctor')}
-                className={`py-2 px-4 rounded-lg font-bold border-2 transition ${role === 'doctor' ? 'bg-[#008985] border-[#008985] text-white' : 'bg-gray-50 border-gray-200 text-gray-500 hover:border-[#008985]'}`}
+                className={`py-2 px-2 sm:px-4 rounded-lg font-bold border-2 transition text-sm sm:text-base ${role === 'doctor' ? 'bg-[#008985] border-[#008985] text-white' : 'bg-gray-50 border-gray-200 text-gray-500 hover:border-[#008985]'}`}
               >
                 👨‍⚕️ Doctor
               </button>
@@ -59,31 +59,35 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Full Name</label>
-            <input type="text" className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50" value={name} onChange={(e) => setName(e.target.value)} required placeholder="John Doe" />
+            <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Full Name</label>
+            <input type="text" className="w-full border border-gray-200 p-2.5 sm:p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-sm sm:text-base" value={name} onChange={(e) => setName(e.target.value)} required placeholder="John Doe" />
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
-               <label className="block text-gray-700 text-sm font-semibold mb-2">Email</label>
-               <input type="email" className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="john@example.com" />
+               <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Email</label>
+               <input type="email" className="w-full border border-gray-200 p-2.5 sm:p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-sm sm:text-base" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="john@example.com" />
              </div>
              <div>
-               <label className="block text-gray-700 text-sm font-semibold mb-2">Phone</label>
-               <input type="tel" className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50" value={phone} onChange={(e) => setPhone(e.target.value)} required placeholder="+91 xxxxx xxxxx" />
+               <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Phone</label>
+               <input type="tel" className="w-full border border-gray-200 p-2.5 sm:p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-sm sm:text-base" value={phone} onChange={(e) => setPhone(e.target.value)} required placeholder="+91 xxxxx xxxxx" />
              </div>
           </div>
+
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Password</label>
-            <input type="password" className="w-full border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" />
+            <label className="block text-gray-700 text-xs sm:text-sm font-semibold mb-1.5 sm:mb-2">Password</label>
+            <input type="password" className="w-full border border-gray-200 p-2.5 sm:p-3 rounded-lg focus:outline-none focus:border-[#008985] bg-gray-50 text-sm sm:text-base" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" />
           </div>
-          <button type="submit" className="w-full bg-[#008985] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#005a57] transition shadow-md mt-4">
+          
+          <button type="submit" className="w-full bg-[#008985] text-white font-bold py-2.5 sm:py-3 px-4 rounded-lg hover:bg-[#005a57] transition shadow-md mt-2 sm:mt-4 text-sm sm:text-base">
             Get Started
           </button>
         </form>
-        <p className="text-center text-sm font-medium text-gray-500 pt-6">
+        <p className="text-center text-xs sm:text-sm font-medium text-gray-500 pt-4 sm:pt-6">
             Already have an account? <Link to="/login" className="font-bold text-[#008985] hover:text-[#005a57]">Log in</Link>
         </p>
     </AuthLayout>
   );
 }
+
 export default Register;
