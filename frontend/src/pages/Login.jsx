@@ -137,7 +137,7 @@ function Login() {
           <div className="flex justify-center overflow-hidden">
             <div className="origin-top scale-[0.85] sm:scale-100">
               <ReCAPTCHA
-                sitekey="YOUR_KEY"
+                sitekey="6LeWs7gsAAAAAJ8Bfsc60yhNGZR8p8PwFfHFmrI9"
                 onChange={handleCaptchaChange}
               />
             </div>
