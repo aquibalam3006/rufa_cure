@@ -102,13 +102,13 @@ function Navbar() {
           SECTION 1: LOGO BLOCK 
           ========================================= */}
       <div
-        className="flex items-center justify-center cursor-pointer px-3 sm:px-4 lg:px-6 py-2 bg-white border-r border-gray-200 flex-shrink-0"
+        className="flex items-center justify-center cursor-pointer px-3 sm:px-4 lg:px-6 py-1 bg-white border-r border-gray-200 flex-shrink-0"
         onClick={() => { setIsMobileMenuOpen(false); navigate('/'); }}
       >
         <img
           src={myLogo}
           alt="RuFa Cure Logo"
-          className="h-20 sm:h-24 lg:h-28 xl:h-32 w-auto object-contain"
+          className="h-16 sm:h-20 lg:h-24 xl:h-28 w-auto object-contain"
         />
       </div>
 
