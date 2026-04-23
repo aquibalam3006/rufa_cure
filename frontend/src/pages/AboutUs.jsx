@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar'; 
-import Footer from '../components/Footer'; 
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 // 🚀 Yahan humne trust.jpg ko import kiya hai
 import trustImage from '../assets/trust.jpg';
+import aquibImage from '../assets/Aquib.png';
 
 function AboutUs() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function AboutUs() {
       <div className="bg-gradient-to-r from-[#008985] to-[#005a57] py-12 sm:py-16 md:py-20 px-6 sm:px-8 text-center text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-40 h-40 md:w-64 md:h-64 bg-white opacity-5 rounded-full -ml-10 -mt-10 md:-ml-20 md:-mt-20"></div>
         <div className="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-white opacity-5 rounded-full -mr-10 -mb-10 md:-mr-20 md:-mb-20"></div>
-        
+
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Text scale karega: 3xl se 6xl tak */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 md:mb-6 leading-tight">
@@ -38,12 +39,12 @@ function AboutUs() {
             <span className="text-[#008985] font-extrabold tracking-wider uppercase text-xs sm:text-sm mb-2 block">Our Story</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 md:mb-6">Why We Built RuFa Cure</h2>
             <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4 md:mb-6">
-              We realized that finding the right doctor and managing medical appointments was often stressful and confusing. Patients spent hours waiting, and doctors struggled with inefficient clinic management. 
+              We realized that finding the right doctor and managing medical appointments was often stressful and confusing. Patients spent hours waiting, and doctors struggled with inefficient clinic management.
             </p>
             <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
               RuFa Cure was born out of a simple idea: <strong className="text-gray-800">Healthcare should be focused on healing, not administration.</strong> We built a smart, secure, and patient-first platform where you can find highly verified specialists, book appointments instantly, and manage your health records seamlessly.
             </p>
-            
+
             {/* Stats mobile me upar-neeche, tablet/laptop me aaju-baaju */}
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
               <div className="border-l-4 border-[#008985] pl-4">
@@ -56,14 +57,14 @@ function AboutUs() {
               </div>
             </div>
           </div>
-          
+
           <div className="relative mt-8 lg:mt-0 px-4 sm:px-0">
             <div className="aspect-square bg-[#e6f4f4] rounded-full absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-full h-full z-0"></div>
             <div className="aspect-square bg-gray-200 rounded-2xl sm:rounded-3xl relative z-10 overflow-hidden shadow-2xl border-4 sm:border-8 border-white flex items-center justify-center">
-              <img 
-                src={trustImage} 
-                alt="RuFa Cure Hospital Trust" 
-                className="w-full h-full object-cover" 
+              <img
+                src={trustImage}
+                alt="RuFa Cure Hospital Trust"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -115,11 +116,15 @@ function AboutUs() {
         {/* Mobile par flex-col, Laptop par flex-row */}
         <div className="bg-gray-900 rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-16 flex flex-col lg:flex-row items-center text-center lg:text-left gap-8 md:gap-12 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 text-[#008985] opacity-20 text-[120px] md:text-[200px] leading-none -mt-4 -mr-4 md:-mt-10 md:-mr-10">"</div>
-          
-          <div className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 shrink-0 bg-gray-700 rounded-full border-4 border-[#008985] overflow-hidden flex items-center justify-center z-10 mx-auto lg:mx-0">
-             <p className="text-gray-400 text-[10px] sm:text-xs italic">Founder Image</p>
+
+          <div className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 shrink-0 rounded-full border-4 border-[#008985] overflow-hidden z-10 mx-auto lg:mx-0">
+            <img
+              src={aquibImage}
+              alt="Founder Aquib Alam"
+              className="w-full h-full object-cover object-center"
+            />
           </div>
-          
+
           <div className="z-10">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-4 md:mb-6 leading-snug lg:leading-tight">
               "We don't just manage hospitals; we manage hopes. When you book an appointment on RuFa Cure, you are trusting us with your life, and we take that responsibility very seriously."
@@ -138,7 +143,7 @@ function AboutUs() {
         <p className="text-sm sm:text-base text-teal-100 font-medium mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
           Join millions of patients who trust RuFa Cure for their daily healthcare needs. Find your specialist and book a consultation today.
         </p>
-        <button 
+        <button
           onClick={() => navigate('/doctors')}
           className="bg-white text-[#008985] px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-bold text-base sm:text-lg hover:bg-gray-100 transition shadow-lg w-full sm:w-auto"
         >
