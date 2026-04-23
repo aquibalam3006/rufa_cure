@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import myLogo from '../assets/logo.png'; 
+import myLogo from '../assets/logo.png';
 
 function Navbar() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
-  const [userRole, setUserRole] = useState('patient'); 
-  const [userInitial, setUserInitial] = useState(''); 
-  
+  const [userRole, setUserRole] = useState('patient');
+  const [userInitial, setUserInitial] = useState('');
+
   // 🚀 NAYA STATE: Mobile Hamburger Menu ko open/close karne ke liye
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -24,7 +24,7 @@ function Navbar() {
           const userObj = JSON.parse(userStr);
           const name = userObj.fullName || userObj.name || 'User';
           setUserName(name);
-          setUserInitial(name.charAt(0).toUpperCase()); 
+          setUserInitial(name.charAt(0).toUpperCase());
 
           if (userObj.role === 'doctor' || name.toLowerCase().startsWith('dr')) {
             setUserRole('doctor');
@@ -42,9 +42,9 @@ function Navbar() {
     setIsMobileMenuOpen(false); // Mobile menu band karo
     navigate('/login');
   };
-  
+
   const handleSignUp = () => {
-    setIsMobileMenuOpen(false); 
+    setIsMobileMenuOpen(false);
     navigate('/register');
   };
 
@@ -53,7 +53,7 @@ function Navbar() {
     localStorage.removeItem('user');
     setIsLoggedIn(false);
     setUserName('');
-    setUserRole('patient'); 
+    setUserRole('patient');
     setUserInitial('');
     setIsMobileMenuOpen(false);
 
@@ -74,7 +74,7 @@ function Navbar() {
   const handleProfileClick = () => {
     setIsMobileMenuOpen(false);
     const user = JSON.parse(localStorage.getItem('user'));
-    
+
     if (user?.role === 'doctor' && user?.hasProfile === false) {
       navigate('/doctor/setup-profile');
     } else if (userRole === 'doctor') {
@@ -102,13 +102,13 @@ function Navbar() {
           SECTION 1: LOGO BLOCK 
           ========================================= */}
       <div
-        className="flex items-center cursor-pointer px-4 lg:px-6 py-2 bg-white border-r border-gray-200 flex-shrink-0"
+        className="flex items-center justify-center cursor-pointer px-3 sm:px-4 lg:px-6 py-2 bg-white border-r border-gray-200 flex-shrink-0"
         onClick={() => { setIsMobileMenuOpen(false); navigate('/'); }}
       >
         <img
           src={myLogo}
           alt="RuFa Cure Logo"
-          className="h-16 sm:h-20 lg:h-24 w-auto object-contain" 
+          className="h-20 sm:h-24 lg:h-28 xl:h-32 w-auto object-contain"
         />
       </div>
 
@@ -163,8 +163,8 @@ function Navbar() {
           <div className="flex items-center justify-end gap-2 sm:gap-4 flex-1">
             {isLoggedIn ? (
               <div className="flex items-center gap-3 sm:gap-4">
-                <div 
-                  className="flex items-center gap-2 sm:gap-3 cursor-pointer group" 
+                <div
+                  className="flex items-center gap-2 sm:gap-3 cursor-pointer group"
                   onClick={handleProfileClick}
                 >
                   <span className="font-bold text-white text-xs sm:text-sm md:text-base group-hover:text-gray-200 transition-colors hidden sm:block whitespace-nowrap">
@@ -199,7 +199,7 @@ function Navbar() {
             )}
 
             {/* 🚀 HAMBURGER ICON (MOBILE ONLY) */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden text-white text-2xl ml-2 focus:outline-none"
             >
@@ -215,7 +215,7 @@ function Navbar() {
           ========================================= */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 flex flex-col md:hidden z-50">
-          
+
           {/* Main Links (Jo Teal bar me the) */}
           <div className="flex flex-col px-6 py-4 space-y-4 border-b border-gray-100">
             {['Home', 'About Us', 'Specialities', 'Service', 'Blog'].map((item) => (
